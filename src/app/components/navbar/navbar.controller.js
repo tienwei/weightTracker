@@ -1,6 +1,9 @@
 'use strict';
 
 angular.module('weightTracker')
-  .controller('NavbarCtrl', function ($scope) {
-    $scope.date = new Date();
-  });
+  .controller('NavbarCtrl', NavbarCtrl);
+
+  function NavbarCtrl () {
+  	var nav = this;
+    nav.date = new Date();
+  };

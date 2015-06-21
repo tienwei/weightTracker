@@ -1,0 +1,32 @@
+<div class="container">
+
+  <div ng-include="'app/components/navbar/navbar.html'"></div>
+
+  <div class="jumbotron text-center">
+    <h1>All Sessions:</h1>
+    
+    <div class="row">
+      <div class="table-responsive">
+        <table class="table table-striped">
+          <thead>
+            <tr><th>Session No.</th><th>Goal Weight</th></tr>
+          </thead>
+          <tbody>
+            <tr ng-repeat="session in sessions.sessions">
+              <td><a href="#/sessions/{{session.id}}">Session {{session.id}}</a></td>
+              <td>{{session.goal}}kg</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>  
+  </div>
+
+
+  <hr>
+
+  <div class="footer">
+    <p>With ♥ from <a href="https://github.com/tienwei/weightTracker">@Tien</a></p>
+  </div>
+
+</div>

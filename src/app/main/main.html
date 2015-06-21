@@ -5,25 +5,42 @@
   <div class="jumbotron text-center">
     <h1>Measure Up!</h1>
     <p class="lead">
-      <img src="assets/images/icon-weightloss.png" alt="I'm Yeoman"><br>
+      <img ng-src="assets/images/icon-weightloss.png" alt="Weight loss"><br>
       Keep weights under controller
     </p>
-    <p><a class="btn btn-lg btn-success" ng-href="#">Get Started</a></p>
-  </div>
-
-  <div class="row">
-    <div class="col-sm-6 col-md-4" ng-repeat="awesomeThing in main.awesomeThings | orderBy:'rank'">
-      <div class="thumbnail">
-        <img class="pull-right" ng-src="assets/images/{{awesomeThing.logo}}" alt="{{awesomeThing.title}}">
-        <div class="caption">
-          <h3>{{awesomeThing.title}}</h3>
-          <p>{{awesomeThing.description}}</p>
-          <p><a ng-href="{{awesomeThing.url}}">{{awesomeThing.url}}</a></p>
+    <p>
+      <h3>Start a new session</h3>
+      <form name="myForm" class="form-inline" novalidate>
+        <div class="form-group">
+          <div class="input-group">
+            <label class="sr-only" for="goal">Weight Goal</label>
+            <input id="goal" name="goal" class="form-control" type="number" ng-model="main.goal" min="30" ng-pattern="/^\-?\d+((\.|\,)\d+)?$/" placeholder="Set up a goal" required />
+            <div class="input-group-addon">kg</div>
+          </div>
+          <button type="submit" class="btn btn-primary" ng-click="main.setupSession(myForm.goal.$valid)">Get Started!</button>
         </div>
+      </form>
+    </p>
+    <p><div class="alert alert-danger" role="alert" ng-hide="main.goalValid" >Please enter a valid weight</div></p>
+    <div class="row" ng-if="main.sessions.length">
+      <p>Or</p>
+      <h3>Select an existing session: </h3>
+      <br>
+      <div class="table-responsive">
+        <table class="table table-striped">
+          <thead>
+            <tr><th>Session No.</th><th>Goal Weight</th></tr>
+          </thead>
+          <tbody>
+            <tr ng-repeat="session in main.sessions">
+              <td><a href="#/sessions/{{session.id}}">Session {{session.id}}</a></td>
+              <td>{{session.goal}}kg</td>
+            </tr>
+          </tbody>
+        </table>
       </div>
-    </div>
+    </div>  
   </div>
-
   <hr>
 
   <div class="footer">

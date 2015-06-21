@@ -1,0 +1,58 @@
+<div class="container">
+
+  <div ng-include="'app/components/navbar/navbar.html'"></div>
+
+  <div class="jumbotron text-center">
+    <h1>Measure Session {{measure.sessId}}</h1>
+      <h2 class="text-danger">Weight Goal: {{measure.session.goal}}kg</h2>
+      <br>
+      <p>
+        <form name="weightEntryForm" novalidate>
+          <h3>Add your weight</h3>
+          <div class="alert alert-success" role="alert" ng-show="measure.done">Successfully Added</div>
+          <div class="form-group text-left">
+            <label for="weightEntry">Weight Goal</label>
+            <div class="input-group">
+              <input id="weightEntry" name="weightEntry" class="form-control" type="number" ng-model="measure.weightEntry" min="30" ng-pattern="/^\-?\d+((\.|\,)\d+)?$/" placeholder="Enter your weight" required />
+              <div class="input-group-addon">kg</div>
+            </div>
+            <div class="alert alert-danger" role="alert" ng-hide="measure.entryValid" >Please enter a valid weight</div>
+          </div>
+          <div class="form-group text-left">
+            <label for="setDate">Specific Date</label>
+            <input type="text" class="form-control" ng-model="setDate" name="setDate" bs-datepicker data-date-format="dd/MM/yy" data-autoclose='1' required>
+            <div class="alert alert-danger" role="alert" ng-hide="measure.dateValid" >Please enter a valid date</div>
+          </div>
+          <div class="form-group">
+            <button type="submit" class="btn btn-primary" ng-click="measure.saveEntry(weightEntryForm.weightEntry.$valid, weightEntryForm.setDate.$valid)">Save</button>
+          </div>
+        </form>
+      </p>
+  </div>
+
+  <div class="row">
+    <h3>Weight entry history:</h3>
+    <div class="table-responsive">
+      <table class="table table-striped">
+        <thead>
+          <tr><th>Date</th><th>Weight</th><th>Edit</th><th>Remove</th></tr>
+        </thead>
+        <tbody>
+          <tr ng-repeat="entry in measure.entries">
+            <td>{{entry.date}}</td>
+            <td>{{entry.weight}}</td>
+            <td>Edit</td>
+            <td>Remove</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <hr>
+
+  <div class="footer">
+    <p>With ♥ from <a href="https://github.com/tienwei/weightTracker">@Tien</a></p>
+  </div>
+
+</div>
